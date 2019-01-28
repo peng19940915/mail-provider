@@ -5,7 +5,7 @@ import (
 	"net/http"
 	_ "net/http/pprof"
 
-	"github.com/open-falcon/mail-provider/config"
+	"github.com/mail-provider/config"
 )
 
 func init() {

@@ -20,7 +20,6 @@ type SmtpConfig struct {
 	Password   string `json:"password"`
 	From       string `json:"from"`
 	TLS        bool   `json:"tls"`
-	Anonymous  bool   `json:"anonymous"`
 	SkipVerify bool   `json:"skipVerify"`
 }
 

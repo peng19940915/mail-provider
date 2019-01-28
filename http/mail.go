@@ -4,8 +4,8 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/open-falcon/mail-provider/config"
-	"github.com/toolkits/smtp"
+	"github.com/mail-provider/config"
+	"github.com/peng19940915/smtp"
 	"github.com/toolkits/web/param"
 )
 
@@ -23,8 +23,8 @@ func configProcRoutes() {
 		subject := param.MustString(r, "subject")
 		content := param.MustString(r, "content")
 		tos = strings.Replace(tos, ",", ";", -1)
-
-		s := smtp.NewSMTP(cfg.Smtp.Addr, cfg.Smtp.Username, cfg.Smtp.Password, cfg.Smtp.TLS, cfg.Smtp.Anonymous, cfg.Smtp.SkipVerify)
+		// 强制关闭匿名邮件
+		s := smtp.NewSMTP(cfg.Smtp.Addr, cfg.Smtp.Username, cfg.Smtp.Password, cfg.Smtp.TLS, false, cfg.Smtp.SkipVerify)
 		err := s.SendMail(cfg.Smtp.From, tos, subject, content)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
